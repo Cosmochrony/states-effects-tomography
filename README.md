@@ -12,7 +12,7 @@ possibilistic support layer completely and the preparation layer for two referen
 leaves open the **states-and-effects layer**: the construction of effect spaces, their bilinear pairing with
 states, local tomography, and any quantum tensor product.
 This paper resolves that layer's finite, mono-system, and bipartite-composition content, importing the
-rank-one cylindrical-conditioning family exactly as the companion paper's Theorem 3 supplies it.
+rank-one cylindrical-conditioning family exactly as the companion paper's Theorem 4.4 supplies it.
 
 > Which parts of the state-effect-tomography package does a finite, rank-one admissibility contract supply
 > for free, and which require an explicitly typed, separately motivated import?
