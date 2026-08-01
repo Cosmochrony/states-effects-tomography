@@ -1,0 +1,7 @@
+# The six verification scripts (convexity_obstruction_tests.py, simplicial_closure_tests.py,
+# affine_effects_tests.py, cc_unification_tests.py, bipartite_composition_tests.py,
+# local_tomography_tests.py) use only fractions/itertools from the Python standard library and need
+# no install.
+# Figure generation (make_figures.py) needs matplotlib; pinned for exact artefact reproduction.
+# Generated and verified under CPython 3.14.5; any CPython >= 3.9 reproduces the exact rational outputs.
+matplotlib==3.10.8

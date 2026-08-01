@@ -1,0 +1,698 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{textcomp}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{doi}
+\geometry{margin=2.5cm}
+\setlength{\emergencystretch}{2em}
+\hypersetup{
+  pdftitle={Finite Criteria for Simplicial States and Local Tomography toward Emergent Operational Composition},
+  pdfauthor={Jérôme Beau},
+  pdfsubject={Convexity, effect availability, and local tomography for a finite rank-one admissibility contract},
+  pdfkeywords={convex state spaces, generalized probabilistic theories, effect algebras, local tomography, classical randomisation, simplicial geometry, non-injective admissibility, emergent composition}
+}
+
+\input{glyphtounicode}
+\pdfgentounicode=1
+
+\graphicspath{{out/}{../out/}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{axiom}[theorem]{Axiom}
+
+\newcommand{\SA}{S_A}
+\newcommand{\SB}{S_B}
+\newcommand{\FA}{F_A}
+\newcommand{\FB}{F_B}
+\newcommand{\FAB}{F_{AB}}
+\newcommand{\conv}{\operatorname{conv}}
+\newcommand{\rk}{\operatorname{rank}}
+\newcommand{\dd}{\delta}
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+
+\title{Finite Criteria for Simplicial States and Local Tomography\\
+toward Emergent Operational Composition}
+
+\author{J\'{e}r\^{o}me Beau\\
+\small Independent Researcher}
+
+\date{2026\\[2pt]\small Version 1.0}
+
+\begin{document}
+
+  \maketitle
+
+  \begin{abstract}
+    The companion paper on effective composition characterises, for a finite substrate without a supplied
+    subsystem factorisation, the possibilistic support layer completely and the preparation layer for two
+    reference classes, and explicitly leaves open the states-and-effects layer of the resulting composition
+    contract.
+    We resolve that layer's finite, mono-system, and bipartite-composition questions, keeping the general
+    preparation layer and the tensor product exactly as open as the companion paper left them.
+    The primitive family arising from cylindrical conditioning of a strictly positive, rank-one reference
+    measure is not itself convex: it is finite while its own convex hull is a continuum, unconditionally, for
+    any local outcome set of size at least two.
+    An explicit classical-randomisation postulate closes it onto the full classical probability simplex,
+    independently of the reference measure's rank; rank governs composition of the primitive family, not the
+    shape of its closure once randomisation is added.
+    Simplicial geometry fixes the mathematical representation of affine effects as vectors in a cube, but not
+    their physical availability as measurements; a weak coarse-graining axiom already yields the entire
+    Boolean skeleton of sharp effects for free, while the full continuum of effects requires a further,
+    dual randomisation postulate on the measurement side.
+    Under two further, distinct, and logically independent axioms --- one for a common classical control
+    resource, one for the physical existence of a composed bipartite effect --- the pointwise product of two
+    local effects is proved unique, not postulated, and local tomography holds exactly when the local effect
+    families linearly span their ambient functional spaces, equivalently when they separate their local
+    states and contain the unit effect in their linear span.
+    All results are finite, exact, and reproduced by committed scripts using rational arithmetic.
+    \emph{Interpretive reading (structural, not a result):} the finite hypotheses examined here force,
+    successively and for free, a classical, simplicial operational skeleton --- convex states once mixing is
+    supplied, a Boolean effect algebra once coarse-graining is supplied, and exact local tomography once
+    spanning local families are supplied --- under precisely identified imports, and produce neither a
+    quantum state geometry nor the Born rule.
+    Locating exactly how much operational structure a finite admissibility contract yields for free, and
+    where every further richness must instead be imported, is the intended service of this result to the
+    non-injective foundations programme: it marks the boundary this classical skeleton cannot cross on its
+    own, and hands that boundary, precisely typed, to whatever module or phase law is proposed next.
+  \end{abstract}
+
+  \paragraph{Keywords.}
+    convex state spaces; generalized probabilistic theories; effect algebras; local tomography; classical
+    randomisation; simplicial geometry; non-injective admissibility; emergent composition.
+
+    \clearpage
+    \tableofcontents
+
+    \clearpage
+  \section{Introduction}
+  \label{sec:intro}
+
+  \subsection{Dependency on Effective Composition}
+    \label{ssec:dependency}
+
+    The companion paper~\cite{Beau2026esub} studies a finite configuration set $\Omega$ carrying a reference
+    admissible subset and two effective projections $\Pi_A, \Pi_B$ that are not assumed injective, with no
+    supplied subsystem factorisation $\Omega \simeq \Omega_A \times \Omega_B$.
+    It names the missing composition structure a transversal contract,
+    $\mathrm{K4} \colon \mathsf{Admissibility} \to \mathsf{Composable\ effective\ subsystems}$, and proves,
+    completely at the possibilistic (support) layer and for two reference preparation classes: the
+    independence blocks of the projected support relation are exactly its nonempty rectangles (bicliques);
+    on a block, the full simplex of preparations lifts every joint law; and, for the family of normalised
+    cylindrical conditionings of a strictly positive fibre-weight matrix $W$ on a block, closure under
+    products of independently locally conditioned states holds if and only if $\rk W = 1$.
+    It explicitly leaves open the general preparation layer and \emph{the states-and-effects layer: the
+    construction of effect spaces, their bilinear pairing with states, local tomography, and any quantum
+    tensor product}.
+
+    This paper imports the rank-one cylindrical-conditioning family exactly as
+    \cite{Beau2026esub}'s Theorem~3 supplies it --- as an already-proved hypothesis on the primitive family,
+    not reopened --- and resolves the states-and-effects layer's finite, mono-system, and
+    bipartite-composition content.
+    The general preparation layer, the tensor product as a supplied structure, local tomography's relation
+    to the Born rule, and any phase/modulus law remain exactly as open as the companion paper left them.
+
+  \subsection{Contributions}
+    \label{ssec:contributions}
+
+    All results are finite and exact, reproduced by six deterministic scripts using rational arithmetic
+    (Appendix~\ref{app:repro}).
+
+    \begin{enumerate}
+      \item \textbf{Primitive convexity obstruction (Theorem~\ref{thm:cv1}).}
+      The raw cylindrical-conditioning family is finite while its convex hull is a continuum, for any local
+      outcome set of size at least two, with no genericity hypothesis --- and the obvious rescue attempt,
+      conditioning inside a projection fibre, fails (Remark~\ref{rem:cv3}).
+      \item \textbf{Simplicial closure (Theorem~\ref{thm:cv6}).}
+      An explicit classical-randomisation postulate closes the family onto the full probability simplex,
+      locally and jointly, independently of the reference measure's rank.
+      \item \textbf{Representation vs.\ availability of effects (Theorem~\ref{thm:ea1}, Theorem~\ref{thm:ea4}).}
+      Affine effects on a simplex correspond to a cube of vectors, a bookkeeping fact special to simplices;
+      a weak coarse-graining axiom already yields the full Boolean effect algebra; the full continuum
+      requires a further, dual randomisation postulate, realised by an explicit multilinear reconstruction.
+      \item \textbf{Independence and consistency of the two randomisations (Theorem~\ref{thm:ccu5}).}
+      The state-side and effect-side randomisation postulates are logically independent, and a common
+      classical control resource reproduces both only under an explicit independence clause between its two
+      interfaces --- dropping it breaks bilinear consistency, by an exact numeric witness.
+      \item \textbf{Uniqueness of the composed effect (Theorem~\ref{thm:bc1}).}
+      Given physical existence of a bipartite effect and the natural compatibility with joint Dirac states,
+      it is forced to equal the pointwise-product formula: no tensor product is imported to define it.
+      \item \textbf{Inaccessible joint effects (Theorem~\ref{thm:bc4}).}
+      Local composition reaches only rectangle effects, strictly fewer than all joint sharp effects; an
+      explicit separating witness shows this survives full local randomisation.
+      \item \textbf{Exact criterion for local tomography (Theorem~\ref{thm:lt3}, Corollary~\ref{cor:lt3corollary}).}
+      Local tomography holds exactly when each side's effect family linearly spans its ambient space,
+      strictly stronger than merely separating its own simplex (Example~\ref{ex:lt2}); equivalently, when it
+      separates states and its linear span contains the unit effect.
+    \end{enumerate}
+
+  \subsection{What this paper does not claim}
+    \label{ssec:nonclaims}
+
+    This paper derives no Born rule, no quantum state geometry, no phase or interference structure, and no
+    tensor product of state spaces as a derived object: the pointwise-product formula for effects is forced
+    given physical existence of a composed effect (an explicit axiom), not a substitute derivation of tensor
+    products for states.
+    Every closure beyond the forced discrete/Boolean skeleton --- state convexity, effect convexity, their
+    joint consistency, and full joint correlational structure --- is obtained only under an explicitly typed,
+    separately motivated postulate, never from the admissibility contract or the simplicial geometry alone.
+    The general preparation layer of~\cite{Beau2026esub} remains open; this paper works entirely within the
+    strictly positive, rank-one, finite reference class it supplies.
+
+  \section{Primitive Convexity Obstruction}
+  \label{sec:cv}
+
+    Fix finite outcome sets $\SA$, $\SB$ and a strictly positive rank-one reference measure
+    $W = (w_{ab}) = \alpha_a \beta_b$ on $\SA \times \SB$, imported unchanged from~\cite{Beau2026esub}.
+    For nonempty $U \subseteq \SA$, the cylindrical conditioning is
+    $p_U^A := \alpha|_U / \alpha(U)$, and symmetrically $p_V^B$ on $\SB$.
+
+    \begin{definition}[Raw families]
+      \label{def:raw}
+      $\FA := \{\, p_U^A : \emptyset \neq U \subseteq \SA \,\}$, $\FB$ symmetric, and
+      $\FAB := \{\, p_U^A \otimes p_V^B : U, V \,\}$.
+    \end{definition}
+
+    \begin{theorem}[Primitive family is never itself convex]
+      \label{thm:cv1}
+      For $m := \abs{\SA} \geq 2$ and any strictly positive $\alpha$: $\FA$ has at most $2^m - 1$ elements
+      (finite), $\conv(\FA) = \Delta(\SA)$ (a continuum of dimension $m - 1$), and hence
+      $\FA \subsetneq \conv(\FA)$, with no genericity hypothesis on $\alpha$.
+    \end{theorem}
+
+    \begin{proof}
+      $\abs{\FA} \leq 2^m - 1 < \infty$ directly from Definition~\ref{def:raw}.
+      Since every singleton $\{a\}$ is an admissible cylindrical condition, $p_{\{a\}}^A$ is the Dirac vertex
+      $\dd_a$, so $\FA$ contains every vertex of $\Delta(\SA)$; hence $\conv(\FA) = \Delta(\SA)$, which has
+      dimension $m - 1 \geq 1$ and is therefore uncountable.
+      A finite set cannot equal an uncountable one.
+    \end{proof}
+
+    \begin{corollary}[Joint family, same obstruction, wider gap]
+      \label{cor:cv2}
+      $\abs{\FAB} \leq (2^m - 1)(2^n - 1)$ (finite, $n := \abs{\SB}$), while $\Delta(\SA \times \SB)$ has
+      dimension $mn - 1$; the already-proved product-closure of~\cite{Beau2026esub} (equivalent to
+      $\rk W = 1$) governs composition of $\FAB$ and does not rescue its convex closure --- the two closure
+      properties are logically independent.
+    \end{corollary}
+
+    \begin{remark}[Objection and reply: sub-fibre conditioning does not rescue convexity]
+      \label{rem:cv3}
+      Since the underlying projections are non-injective, one might hope that conditioning inside a fibre,
+      rather than only on saturated unions of fibres, fills in the continuum for free.
+      It does not: a local condition, by construction, is a function of $\Pi_A$-observable information
+      alone, and points within one fibre are by definition indistinguishable under $\Pi_A$.
+      Any rule that nonetheless selects a sub-fibre slice must consult information external to what $\Pi_A$
+      can see --- exactly an external classical selector of the kind whose necessity is in question, now
+      relocated rather than removed.
+    \end{remark}
+
+  \section{Simplicial Closure under Classical Randomisation}
+  \label{sec:closure}
+
+    \begin{axiom}[P1: classical randomisation of preparations]
+      \label{ax:p1}
+      If $p, q$ are effective preparations already reached and $\lambda \in [0,1]$, an external procedure
+      exists that prepares $\lambda p + (1-\lambda) q$ as an effective preparation.
+    \end{axiom}
+
+    P1 is imported by name, not derived, and is exactly the ingredient Theorem~\ref{thm:cv1} shows missing.
+
+    \begin{theorem}[Full simplicial closure, rank-independent]
+      \label{thm:cv6}
+      Under Axiom~\ref{ax:p1}, $\conv(\FA) = \Delta(\SA)$ and $\conv(\FAB) = \Delta(\SA \times \SB)$ exactly
+      --- and the joint statement holds for \emph{any} strictly positive $W$, not only $\rk W = 1$.
+    \end{theorem}
+
+    \begin{proof}
+      The local statement restates Theorem~\ref{thm:cv1}'s vertex argument under P1.
+      For the joint statement: $p_{\{a\}}^A \otimes p_{\{b\}}^B = \dd_a \otimes \dd_b = \dd_{(a,b)}$ for every
+      $(a,b)$, using only that $p_U^A, p_V^B$ condition the two \emph{marginals} of $W$ --- true whether or
+      not $W$ factorises.
+      So $\FAB$ contains every joint Dirac vertex regardless of $\rk W$, and P1 reaches their convex hull,
+      the whole simplex.
+    \end{proof}
+
+    \begin{remark}[Rank governs the generators, not the closure]
+      \label{rem:cv7}
+      $\rk W$ decides whether the \emph{primitive} family composes as a product (\cite{Beau2026esub}'s
+      Theorem~3); it becomes invisible once P1 is added, since a rank-one and a fully correlated $W$ both
+      close, under P1, onto the identical $\Delta(\SA \times \SB)$.
+    \end{remark}
+
+  \section{Affine Representation vs.\ Physical Availability of Effects}
+  \label{sec:ea}
+
+    \begin{definition}[Effect]
+      \label{def:effect}
+      An effect on $\Delta(S)$ is an affine map $e \colon \Delta(S) \to [0,1]$.
+    \end{definition}
+
+    \begin{theorem}[Representation]
+      \label{thm:ea1}
+      The set of affine $[0,1]$-valued functions on $\Delta(S)$, $\abs{S} = m$, corresponds bijectively to
+      $[0,1]^S$, via $v_a := e(\dd_a)$, $e(p) = \sum_a p(a) v_a$.
+      This identifies a purely mathematical function space with a cube and carries no physical content: it
+      is never, by itself, a claim that every vector of that cube is a physically available effect --- which
+      of them are is the separate question this section and Section~\ref{sec:composition} answer.
+    \end{theorem}
+
+    \begin{proof}
+      Every $p \in \Delta(S)$ decomposes uniquely as $p = \sum_a p(a) \dd_a$, since the Dirac vertices are
+      affinely independent (the defining property of a simplex); affinity of $e$ then gives
+      $e(p) = \sum_a p(a) e(\dd_a)$.
+      Conversely, for any $v \in [0,1]^S$, $p \mapsto \langle v, p \rangle$ is affine and, being a convex
+      combination of numbers in $[0,1]$, valued in $[0,1]$.
+      The two constructions are mutually inverse.
+    \end{proof}
+
+    \begin{remark}[Why this is special to a simplex]
+      \label{rem:ea1-simplex}
+      Both directions used affine independence of the vertices: it is what makes the decomposition of $p$
+      unique, and what removes any consistency constraint on an arbitrary choice of boundary values $v_a$.
+      On a non-simplicial convex body, the vertices satisfy nontrivial affine relations, and not every
+      boundary assignment extends to an affine function; the representation theorem's triviality here is a
+      structural feature of the classical/simplicial case, not a general fact about convex state spaces.
+    \end{remark}
+
+    \begin{theorem}[Tight minimal separating family]
+      \label{thm:ea2}
+      $\{ e_a : a \in S \setminus \{a_0\} \}$ (any $m-1$ coordinate effects) separates $\Delta(S)$; no $m-2$
+      of them do.
+    \end{theorem}
+
+    \begin{proof}
+      If $p, q$ agree on every coordinate but $a_0$, normalisation forces
+      $p(a_0) = 1 - \sum_{a \neq a_0} p(a) = 1 - \sum_{a \neq a_0} q(a) = q(a_0)$, so $p = q$.
+      For tightness, exhibit $p, q$ agreeing on $m-2$ fixed coordinates while differing on the remaining two,
+      both summing to~$1$.
+    \end{proof}
+
+    \begin{axiom}[AX-CG: coarse-graining]
+      \label{ax:cg}
+      Grouping the outcomes of an already-given partition into a coarser yes/no question is itself a
+      legitimate effect.
+    \end{axiom}
+
+    \begin{theorem}[Boolean skeleton, unit effect for free]
+      \label{thm:ea3}
+      Under Axiom~\ref{ax:cg} alone, the canonical partition $\{e_a : a \in S\}$ generates exactly the
+      $2^m$ indicator effects $\{\mathbf{1}_U : U \subseteq S\}$ --- the full vertex set of $[0,1]^S$ --- and
+      its own sum is the unit effect: $\sum_a e_a = u$, with no separate normalisation postulate.
+    \end{theorem}
+
+    \begin{proof}
+      $\mathbf{1}_U = \sum_{a \in U} e_a$ by coarse-graining; ranging $U$ over all subsets gives exactly the
+      $\{0,1\}$-valued vectors, which are exactly the vertices of the cube.
+      $\sum_a e_a(p) = \sum_a p(a) = 1$ for every $p$.
+    \end{proof}
+
+    \begin{axiom}[AX-RND: effect randomisation, dual of P1]
+      \label{ax:rnd}
+      If $e_1, e_2$ are effects and $\lambda \in [0,1]$, an external procedure (flip a $\lambda$-biased coin,
+      then run $e_1$ or $e_2$) realises $\lambda e_1 + (1-\lambda) e_2$ as an effect.
+    \end{axiom}
+
+    \begin{theorem}[Full cube, explicit reconstruction]
+      \label{thm:ea4}
+      Under Axioms~\ref{ax:cg} and~\ref{ax:rnd}, $\conv(\{\mathbf{1}_U\}) = [0,1]^S$: every
+      $x \in [0,1]^S$ equals $\sum_{U \subseteq S} w_U \mathbf{1}_U$ with
+      $w_U := \prod_{a \in U} x_a \prod_{a \notin U} (1-x_a)$, the probabilities of $m$ independent Bernoulli
+      trials with biases $x_a$.
+    \end{theorem}
+
+    \begin{proof}
+      $w_U \geq 0$ since each $x_a \in [0,1]$, and $\sum_U w_U = \prod_a (x_a + (1-x_a)) = 1$ by the binomial
+      expansion; substitution confirms the sum reproduces $x$ coordinatewise.
+    \end{proof}
+
+    \begin{remark}[Topological closure is redundant here]
+      \label{rem:ea5}
+      $S$ is finite, so any convex hull of the resulting finite vertex set is automatically closed; a
+      further topological-closure axiom has no work to do at this scale.
+    \end{remark}
+
+  \section{Independence of the Two Randomisations}
+  \label{sec:cc}
+
+    P1 (Axiom~\ref{ax:p1}) randomises preparations upstream; AX-RND (Axiom~\ref{ax:rnd}) randomises effects
+    downstream.
+    Formal duality does not imply operational equivalence: a model may grant either without the other.
+
+    \begin{example}[Independence counter-models]
+      \label{ex:cc-indep}
+      $\Delta(S_A)$ full, but effects restricted to the $2^m$ Boolean indicators (P1 without AX-RND): every
+      pairing $\mathbf{1}_U(p)$ is well defined for $p \in \Delta(S_A)$ regardless of what else is available.
+      Dually, the raw unclosed family $\FA$ as states but the full cube $[0,1]^{S_A}$ as effects (AX-RND
+      without P1): Theorem~\ref{thm:ea4}'s reconstruction never used state-space convexity.
+      Neither postulate presupposes the other.
+    \end{example}
+
+    \begin{axiom}[CC: common classical control resource]
+      \label{ax:cc}
+      An external classical random source, statistically independent of the system, can be wired (CC-P) to
+      select between two preparation procedures and, independently (CC-M), to select between two measurement
+      procedures; when both interfaces are exercised in the same trial, the two samples drawn are
+      statistically independent of each other (CC-IND).
+    \end{axiom}
+
+    CC-P and CC-M each immediately deliver P1 and AX-RND respectively, by the law of total probability; the
+    substantive content is CC-IND.
+
+    \begin{theorem}[Bilinear consistency requires CC-IND]
+      \label{thm:ccu5}
+      The algebraic identity $(\lambda e + (1-\lambda)f)(\mu p + (1-\mu)q) = \lambda\mu\, e(p) +
+      \lambda(1-\mu)\, e(q) + (1-\lambda)\mu\, f(p) + (1-\lambda)(1-\mu)\, f(q)$ holds unconditionally.
+      Physically running a $\lambda$-biased choice of effect and a $\mu$-biased choice of preparation
+      reproduces this value \emph{if and only if} the two choices are drawn independently.
+      Reusing one shared bit for both choices (forcing $\mu = \lambda$) instead gives
+      $\lambda\, e(p) + (1-\lambda)\, f(q)$, missing both cross terms.
+    \end{theorem}
+
+    \begin{proof}
+      The algebraic identity is direct substitution.
+      Independent draws average the reported outcome over four branches with product weights
+      $\lambda\mu, \lambda(1-\mu), (1-\lambda)\mu, (1-\lambda)(1-\mu)$, reproducing the identity by
+      construction.
+      A single shared bit has only two branches, weighted $\lambda, 1-\lambda$, giving the stated two-term
+      sum.
+    \end{proof}
+
+    \begin{example}[Numeric witness]
+      \label{ex:ccu5-numeric}
+      On $S = \{0,1\}$, with $p = (7/10, 3/10)$, $q = (1/5, 4/5)$, $e = (9/10, 1/10)$, $f = (2/5, 3/5)$,
+      $\lambda = 1/3$: independent taps give exactly $217/450$, matching the algebraic value; a shared bit
+      at $\mu = \lambda = 1/3$ gives $89/150 = 267/450$, a discrepancy of exactly $1/9$
+      (\texttt{code/cc\_unification\_tests.py}).
+    \end{example}
+
+    \begin{remark}[Verdict]
+      \label{rem:ccu6}
+      Unification of P1 and AX-RND under a single resource is possible, but only under Axiom~\ref{ax:cc} in
+      full, including CC-IND; it is not derived from $\Delta(S)$'s geometry, nor from P1/AX-RND's formal
+      duality alone.
+    \end{remark}
+
+  \section{Bipartite Composition: the Pointwise Product is Forced}
+  \label{sec:composition}
+
+    \begin{axiom}[AX-COMP: physical existence of a composed effect]
+      \label{ax:comp}
+      For each pair of physically available local effects $e$ (on $\SA$), $f$ (on $\SB$), a joint effect
+      $e \boxtimes f$, affine on $\Delta(\SA \times \SB)$, is physically realised.
+    \end{axiom}
+
+    \begin{theorem}[Uniqueness of the composed effect]
+      \label{thm:bc1}
+      If $e \boxtimes f$ exists (Axiom~\ref{ax:comp}) and satisfies Dirac-factorisation,
+      $(e \boxtimes f)(\dd_{(a,b)}) = e(\dd_a) f(\dd_b)$, then it is uniquely
+      \begin{equation}
+        \label{eq:pointwise}
+        (e \boxtimes f)(p) = \sum_{(a,b)} p_{ab}\, e_a f_b.
+      \end{equation}
+    \end{theorem}
+
+    \begin{proof}
+      Immediate corollary of Theorem~\ref{thm:ea1} applied with outcome set $\SA \times \SB$:
+      $\Delta(\SA \times \SB)$ is itself a simplex, so any affine function on it (which $e \boxtimes f$ is,
+      by Definition~\ref{def:effect}) is fixed uniquely by its Dirac values, given as $e_a f_b$ by
+      hypothesis.
+    \end{proof}
+
+    Equation~\eqref{eq:pointwise} is what one would ordinarily call the tensor-product effect $e \otimes f$
+    evaluated pointwise; no tensor-product formalism is imported to \emph{define} it.
+    What remains imported is Axiom~\ref{ax:comp}'s existence clause: for a given pair, whether such a joint
+    measurement is physically available at all.
+
+    \begin{remark}[Operational bilinearity again requires CC-IND]
+      \label{rem:bc2}
+      As algebra, $e \boxtimes f$ is bilinear in $(e,f)$ with no ambiguity.
+      The operational question --- does physically randomising the local-effect choice on each side
+      reproduce the bilinear expansion in a single trial --- is exactly Theorem~\ref{thm:ccu5}, relocated to
+      the two composition interfaces.
+      Numeric witness (\texttt{code/bipartite\_composition\_tests.py}, generic non-product joint state):
+      independent taps reproduce the bilinear value $161/600$ exactly; a shared bit at the forced common
+      bias gives $147/500$ against a true value of $49/180$, a discrepancy of $49/2250$.
+    \end{remark}
+
+  \section{Inaccessible Joint Effects: the Diagonal Witness}
+  \label{sec:diagonal}
+
+    Taking $e = \mathbf{1}_U$, $f = \mathbf{1}_V$ (local sharp effects), Equation~\eqref{eq:pointwise} gives
+    $\mathbf{1}_U \boxtimes \mathbf{1}_V = \mathbf{1}_{U \times V}$, the indicator of the rectangle
+    $U \times V$.
+
+    \begin{theorem}[Rectangles are strictly fewer than all joint sharp effects]
+      \label{thm:bc3}
+      For $m, n \geq 2$, rectangles number at most $(2^m-1)(2^n-1) + 1$, strictly fewer than $2^{mn}$; for
+      $m = n = 2$, exactly $10$ of the $16$ subsets of $\SA \times \SB$ are rectangles.
+    \end{theorem}
+
+    \begin{proof}[Proof (census, $m=n=2$)]
+      By size: $1$ (empty) $+ 4$ (singletons, all rectangles) $+ 4$ (the four row/column pairs, out of $6$
+      possible size-two subsets) $+ 0$ (no size-three subset has $\abs{U}\abs{V} = 3$ for
+      $\abs{U},\abs{V} \in \{1,2\}$) $+ 1$ (the whole space) $= 10$
+      (\texttt{code/bipartite\_composition\_tests.py}).
+    \end{proof}
+
+    \begin{theorem}[Local products, however randomised, cannot reach the diagonal]
+      \label{thm:bc4}
+      Define $\varphi(M) := M_{00} + M_{11} - M_{01} - M_{10}$ on $\SA \times \SB = \{0,1\}^2$.
+      For any convex combination of rank-one products $M = \sum_k w_k(e_k \otimes f_k)$,
+      $\varphi(M) \in [-1,1]$; but $\varphi(\mathbf{1}_{\{(0,0),(1,1)\}}) = 2$.
+    \end{theorem}
+
+    \begin{proof}
+      $\varphi(e \otimes f) = (e_0 - e_1)(f_0 - f_1)$, a product of two numbers in $[-1,1]$ (since
+      $e_i, f_i \in [0,1]$), hence itself in $[-1,1]$; $\varphi$ is linear, so a weighted average of such
+      values stays in $[-1,1]$.
+      The diagonal indicator has $\varphi = 1 + 1 - 0 - 0 = 2$, outside that range
+      (\texttt{code/bipartite\_composition\_tests.py}).
+    \end{proof}
+
+    \begin{remark}[A structural resemblance, not a physics claim]
+      \label{rem:chsh}
+      The bound $\varphi \in [-1,1]$ for mixtures of product objects, violated by a genuinely correlated one,
+      has the shape of a CHSH-type inequality~\cite{ClauserHorneShimonyHolt1969}.
+      This is stated here as an elementary fact about real numbers in $[-1,1]$ and convex combinations; it
+      makes no claim about, and is not evidence for or against, anything in the physical Bell-nonlocality
+      literature, which concerns quantum measurement statistics, a different question.
+    \end{remark}
+
+    \begin{remark}[Headline classification]
+      \label{rem:bc5}
+      Reaching the full joint Boolean algebra (all $2^{mn}$ sharp effects) or the full cube
+      $[0,1]^{\SA \times \SB}$ requires a separate, strictly stronger axiom applied directly to
+      $\SA \times \SB$ as its own system (Axioms~\ref{ax:cg}, \ref{ax:rnd} run with that combined outcome
+      set) --- not obtainable from local composition, local randomisation, or their combination.
+    \end{remark}
+
+  \section{Exact Criterion for Local Tomography}
+  \label{sec:tomography}
+
+    \begin{theorem}[Full coordinate families reconstruct the joint state]
+      \label{thm:lt1}
+      $(e_a \boxtimes f_b)(p) = p_{ab}$ for every $(a,b)$ (immediate from Equation~\eqref{eq:pointwise}); the
+      $mn$ numbers so obtained are $p$'s own coordinates.
+    \end{theorem}
+
+    \begin{example}[The naive general formulation is false]
+      \label{ex:lt2}
+      Take $E_A = \{e_1\}$, $E_B = \{f_1\}$ on $\SA = \SB = \{0,1\}$ --- each separates its own simplex
+      (Theorem~\ref{thm:ea2}, $m=2$).
+      Yet $q = (1/10, 2/10, 3/10, 4/10)$ and $q' = (3/10, 1/10, 2/10, 4/10)$ (order $(0,0),(0,1),(1,0),(1,1)$)
+      are distinct states with $(e_1 \boxtimes f_1)(q) = (e_1 \boxtimes f_1)(q') = 2/5$
+      (\texttt{code/local\_tomography\_tests.py}).
+      Local separation of each side does not imply that products separate the joint simplex.
+    \end{example}
+
+    \begin{theorem}[Corrected criterion: linear spanning]
+      \label{thm:lt3}
+      If $E_A$'s vectors linearly span $\mathbb{R}^{\SA}$ and $E_B$'s span $\mathbb{R}^{\SB}$, then
+      $E_A \boxtimes E_B$ separates $\Delta(\SA \times \SB)$.
+    \end{theorem}
+
+    \begin{proof}
+      Let $D := Q - Q'$ satisfy $e^T D f = 0$ for all $e \in E_A, f \in E_B$.
+      Fixing $e$, the row vector $e^T D$ is orthogonal to every $f \in E_B$; since $E_B$ spans
+      $\mathbb{R}^{\SB}$, $e^T D = 0$ for every $e \in E_A$.
+      Since $E_A$ spans $\mathbb{R}^{\SA}$, $D = 0$.
+      Contrapositive: $Q \neq Q'$ forces some $e,f$ with $(e \boxtimes f)(Q) \neq (e \boxtimes f)(Q')$.
+    \end{proof}
+
+    Spanning needs at least $m$ elements, strictly more than Theorem~\ref{thm:ea2}'s $m-1$-sufficient
+    separation; Example~\ref{ex:lt2} is exactly the gap between the two.
+
+    \begin{corollary}[Separation plus the unit effect is equivalent to spanning]
+      \label{cor:lt3corollary}
+      If $E$ separates $\Delta(S)$ and the unit effect $u = (1,\dots,1) \in \operatorname{span}(E)$, then
+      $\operatorname{span}(E) = \mathbb{R}^S$.
+    \end{corollary}
+
+    \begin{proof}
+      Suppose $V := \operatorname{span}(E) \subsetneq \mathbb{R}^S$ with $u \in V$.
+      Take nonzero $w$ in $V^\perp$: $w \perp e$ for every $e \in E$, and $w \perp u$, i.e.\
+      $\sum_a w_a = 0$.
+      Fix an interior $p_0 \in \Delta(S)$; for small enough $\varepsilon$, $p := p_0 + \varepsilon w$ and
+      $p' := p_0 - \varepsilon w$ both lie in $\Delta(S)$ (their coordinates still sum to $1$) and are
+      distinct.
+      Yet $e(p) - e(p') = 2\varepsilon \langle e, w \rangle = 0$ for every $e \in E \subseteq V$: $E$ fails to
+      separate $p$ from $p'$, contradicting the hypothesis.
+      So no such proper $V$ exists.
+    \end{proof}
+
+    Theorem~\ref{thm:ea2}'s minimal family spans only the coordinate hyperplane $\{x : x_{a_0} = 0\}$, which
+    does not contain $u$; adding $u$ supplies precisely the missing direction, and under Axiom~\ref{ax:cg}'s
+    full partition $u$ is already free (Theorem~\ref{thm:ea3}).
+    Local tomography therefore needs nothing beyond a locally separating family, composable by
+    Axiom~\ref{ax:comp}, enriched by its own normalisation.
+
+    \begin{remark}[Redundancy and a computable-but-unavailable expectation]
+      \label{rem:lt5lt6}
+      Dropping any single one of the $mn$ full-coordinate products still permits exact reconstruction by
+      normalisation, echoing Theorem~\ref{thm:ea2} at the joint level.
+      Once tomography reconstructs $p$, the expectation of \emph{any} affine functional --- including the
+      diagonal indicator of Theorem~\ref{thm:bc4}, physically unavailable by composition alone --- is simply
+      $\sum_{ab} p_{ab} v_{ab}$: physical availability of an effect and computability of its expectation on a
+      reconstructed state are different properties (\texttt{code/local\_tomography\_tests.py}).
+    \end{remark}
+
+  \section{Position and Scope}
+  \label{sec:position}
+
+  \subsection{Position within the neighbouring literature}
+    \label{ssec:position}
+
+    \paragraph{Generalized probabilistic theories.}
+    States, effects, and their bilinear pairing are standard operational input in GPT
+    reconstructions~\cite{Hardy2001,Barrett2007,ChiribellaDArianoPerinotti2011}; local tomography is among
+    the axioms distinguishing complex quantum theory from its real and quaternionic
+    variants~\cite{Barrett2007}, and recent work shows single-system structure alone does not fix the
+    composition rule~\cite{ErbaPerinotti2024}.
+    This paper works one level below that literature's starting point: it derives which parts of the
+    state-effect-tomography package a finite admissibility contract supplies for free, and which require an
+    explicitly typed import, rather than taking the full package as given.
+
+    \paragraph{Operational effect algebras.}
+    Effects as affine $[0,1]$-valued functionals on a convex state space, and their operational role, trace
+    to~\cite{DaviesLewis1970} and to Ludwig's axiomatic convex-state-space
+    programme~\cite{Ludwig1983}.
+    Theorems~\ref{thm:ea1}--\ref{thm:ea4} work inside that same formal object but ask a different question of
+    it: which subset of the mathematically possible effect functionals is forced by coarse-graining alone,
+    and which requires an explicit randomisation postulate, rather than assuming from the outset that every
+    bounded affine functional is available.
+
+    \paragraph{CHSH and Bell-inequality mathematics.}
+    The separating witness of Theorem~\ref{thm:bc4} has the algebraic shape of the original
+    CHSH construction~\cite{ClauserHorneShimonyHolt1969}, restricted here to an entirely classical,
+    finite-dimensional statement about real numbers in $[-1,1]$; Remark~\ref{rem:chsh} states explicitly that
+    no claim about physical nonlocality is made or needed.
+
+  \subsection{Scope}
+    \label{ssec:scope}
+
+    The finite hypotheses studied here force, successively and under precisely identified imports, a
+    classical operational skeleton: convex states once classical randomisation (Axiom~\ref{ax:p1}) is
+    supplied; a Boolean effect algebra once coarse-graining (Axiom~\ref{ax:cg}) is supplied, and the full
+    effect cube once its dual randomisation (Axiom~\ref{ax:rnd}) is also supplied; a forced, tensor-free
+    pointwise product once physical composition (Axiom~\ref{ax:comp}) is supplied; and exact local tomography
+    once the local families span their ambient spaces.
+    Nowhere in this chain does a quantum state geometry or the Born rule appear, and none is derived: every
+    non-classical structure the wider programme eventually needs --- a complex or quaternionic carrier, an
+    interference/modulus law, a non-simplicial state space --- lies strictly outside what this contract
+    supplies, and must be imported by its own, separately typed postulate.
+
+  \section{Discussion}
+  \label{sec:discussion}
+
+  \subsection{Interpretive outlook}
+    \label{ssec:outlook}
+
+    The following reading is interpretation --- a structural way of situating the results --- and not itself
+    a result.
+    A finite admissibility contract, left to itself, does not drift toward quantum structure; it settles, at
+    every layer examined, into the classical/simplicial regime, and only moves beyond it when a
+    correspondingly explicit postulate is supplied.
+    This is not a deficiency of the contract: it is a precise map of where the classical skeleton's authority
+    ends, handed forward, typed axiom by typed axiom (P1, AX-CG, AX-RND, CC, AX-COMP), to whatever
+    phase/modulus law is proposed to take the programme beyond it.
+    A future amplitude-modulus construction inherits this map as its starting boundary condition, not as a
+    competing description to be reconciled with it.
+
+  \subsection{Limits and future work}
+    \label{ssec:limits}
+
+    The general preparation layer of~\cite{Beau2026esub} is untouched.
+    The CHSH-type witness of Theorem~\ref{thm:bc4} is proved for $m=n=2$; whether it generalises cleanly to
+    larger outcome sets is not shown here, though the rectangle/all-subsets gap of Theorem~\ref{thm:bc3} only
+    widens.
+    Whether Axiom~\ref{ax:cc}'s independence clause should itself be independently motivated, rather than
+    postulated, is left open.
+    The natural next step, outside this contract entirely, is to ask what could constrain an amplitude
+    modulus without conflating exclusion, mixture, and coherent cancellation --- a question this paper
+    deliberately leaves untouched.
+
+  \section*{Acknowledgements}
+    Portions of the analysis and editorial preparation benefited from iterative interactions with large
+    language models used as analytical assistants.
+    All claims and final formulations remain the sole responsibility of the author.
+
+  \appendix
+
+  \section{Reproduction}
+  \label{app:repro}
+
+    All numerical claims are reproduced by six deterministic scripts using exact rational arithmetic
+    (Python's \texttt{fractions.Fraction}) and no dependencies beyond the standard library:
+    \begin{itemize}
+      \item \texttt{code/convexity\_obstruction\_tests.py} --- Theorem~\ref{thm:cv1}, Corollary~\ref{cor:cv2};
+      \item \texttt{code/simplicial\_closure\_tests.py} --- Theorem~\ref{thm:cv6};
+      \item \texttt{code/affine\_effects\_tests.py} --- Theorems~\ref{thm:ea1}--\ref{thm:ea4};
+      \item \texttt{code/cc\_unification\_tests.py} --- Theorem~\ref{thm:ccu5}, Example~\ref{ex:ccu5-numeric};
+      \item \texttt{code/bipartite\_composition\_tests.py} --- Theorem~\ref{thm:bc1},
+      Remark~\ref{rem:bc2}, Theorems~\ref{thm:bc3}--\ref{thm:bc4};
+      \item \texttt{code/local\_tomography\_tests.py} --- Theorem~\ref{thm:lt1}, Example~\ref{ex:lt2},
+      Theorem~\ref{thm:lt3}, Corollary~\ref{cor:lt3corollary}, Remark~\ref{rem:lt5lt6}.
+    \end{itemize}
+    Figure~\ref{fig:ladder} is generated by \texttt{code/make\_figures.py}, under the pinned environment
+    recorded in \texttt{code/requirements.txt}.
+    From a fresh clone:
+    \begin{verbatim}
+python3 code/convexity_obstruction_tests.py
+python3 code/simplicial_closure_tests.py
+python3 code/affine_effects_tests.py
+python3 code/cc_unification_tests.py
+python3 code/bipartite_composition_tests.py
+python3 code/local_tomography_tests.py
+bash build.sh
+    \end{verbatim}
+    The scripts print the full inventories; \texttt{build.sh} regenerates the figure, verifies it against
+    \texttt{ARTIFACT\_SHA256SUMS}, and compiles the paper.
+
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[width=\textwidth]{fig_ladder}
+      \caption{A: the $7 = 2^3-1$ points reached by cylindrical conditioning on $\Delta(\SA)$, $m=3$
+      (Theorem~\ref{thm:cv1}), against the shaded full simplex reachable only under Axiom~\ref{ax:p1}.
+      B: a rectangle (reachable by local composition) against the diagonal (unreachable, Theorem~\ref{thm:bc4})
+      on $\SA \times \SB = \{0,1\}^2$.
+      Generated by \texttt{code/make\_figures.py}.}
+      \label{fig:ladder}
+    \end{figure}
+
+  \bibliographystyle{plain}
+  \bibliography{cosmochrony-bibliography,external-refs}
+
+\end{document}
