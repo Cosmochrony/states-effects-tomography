@@ -1,18 +1,18 @@
 """
-Generates fig_ladder.pdf: a two-panel illustration of the paper's two central obstructions.
+Generates two figures, each placed inline near its relevant section rather than bundled in the appendix.
 
-Panel A illustrates CV1 (Section 2): the finite family of cylindrical conditionings on Delta(S_A), m=3,
-reaches exactly 7 = 2^3-1 points (the 3 Dirac vertices, the 3 two-element-subset conditionings on the
-edges, and the unconditioned prior in the interior) -- while the shaded triangle is the full simplex,
-reachable only once the classical-randomisation postulate P1 is added.
+fig_cv1.pdf illustrates Theorem 2.2 (Section 2): the finite family of cylindrical conditionings on
+Delta(S_A), m=3, reaches exactly 7 = 2^3-1 points (the 3 Dirac vertices, the 3 two-element-subset
+conditionings on the edges, and the unconditioned prior in the interior) -- while the shaded triangle is
+the full simplex, reachable only once the classical-randomisation postulate P1 (Axiom 3.1) is added.
 
-Panel B illustrates BC3-BC4 (Section 6): on the joint outcome set S_A x S_B = {0,1}^2, a rectangle
-(e.g. the row {0,1}x{0}) is reachable as a product of local sharp effects, while the diagonal
-{(0,0),(1,1)} is not reachable by any combination of local products, however locally randomised
-(the CHSH-type witness of Section 6).
+fig_diagonal.pdf illustrates Theorems 7.1-7.2 (Section 7): on the joint outcome set S_A x S_B = {0,1}^2, a
+rectangle (e.g. the column {0,1}x{0}) is reachable as a product of local sharp effects, while the diagonal
+{(0,0),(1,1)} is not reachable by any combination of local products, however locally randomised (the
+CHSH-type witness of Theorem 7.2).
 
-This figure is illustrative of already-proven finite/combinatorial facts (see the six code/*_tests.py
-scripts for the exact verification); it introduces no new numerical claim.
+Both figures are illustrative of already-proven finite/combinatorial facts (see the six code/*_tests.py
+scripts for the exact verification); neither introduces a new numerical claim.
 
 Deterministic: no randomness; SOURCE_DATE_EPOCH is honoured by the build script for reproducible PDF
 metadata.
@@ -70,7 +70,7 @@ def panel_a(ax):
     ax.set_ylim(-0.15, 1.05)
     ax.set_aspect("equal")
     ax.axis("off")
-    ax.set_title(r"A. $\Delta(S_A)$, $m=3$: 7 achieved points vs. the shaded full simplex",
+    ax.set_title(r"$\Delta(S_A)$, $m=3$: 7 achieved points vs. the shaded full simplex",
                  fontsize=10)
 
 
@@ -97,18 +97,25 @@ def panel_b(ax):
     ax.set_ylim(-0.9, 2.3)
     ax.set_aspect("equal")
     ax.axis("off")
-    ax.set_title("B. Rectangles vs. the diagonal on $S_A \\times S_B = \\{0,1\\}^2$", fontsize=10)
+    ax.set_title("Rectangles vs. the diagonal on $S_A \\times S_B = \\{0,1\\}^2$", fontsize=10)
 
 
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
-    fig, axes = plt.subplots(1, 2, figsize=(10, 4.2))
-    panel_a(axes[0])
-    panel_b(axes[1])
-    fig.tight_layout()
-    out_path = os.path.join(OUT_DIR, "fig_ladder.pdf")
-    fig.savefig(out_path, metadata={"CreationDate": None})
-    print(f"Wrote {out_path}")
+
+    fig_a, ax_a = plt.subplots(figsize=(5.2, 4.6))
+    panel_a(ax_a)
+    fig_a.tight_layout()
+    path_a = os.path.join(OUT_DIR, "fig_cv1.pdf")
+    fig_a.savefig(path_a, metadata={"CreationDate": None})
+    print(f"Wrote {path_a}")
+
+    fig_b, ax_b = plt.subplots(figsize=(6.4, 3.2))
+    panel_b(ax_b)
+    fig_b.tight_layout()
+    path_b = os.path.join(OUT_DIR, "fig_diagonal.pdf")
+    fig_b.savefig(path_b, metadata={"CreationDate": None})
+    print(f"Wrote {path_b}")
 
 
 if __name__ == "__main__":
