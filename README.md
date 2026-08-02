@@ -4,6 +4,9 @@ This repository contains the source of the Cosmochrony paper
 *Finite Criteria for Simplicial States and Local Tomography toward Emergent Operational Composition*,
 a working paper of the **non-injective foundations sub-programme**, companion to
 [Effective Composition](https://cosmochrony.org/science/non-injective/effective-composition/).
+The phase/modulus question this paper's conclusion leaves open, "the natural next step, outside this
+contract entirely," is taken up by
+[Refinement Consistency Obstructs Nonlinear Power Lifts of Finite History Measures](https://cosmochrony.org/science/history-measure-power-lift-obstruction/).
 
 ## Central Question
 
